@@ -1,0 +1,14 @@
+1. user
+ create user : useradd "username"
+    create password for user : passwd "username"
+    delete user : userdel "username"
+
+2. group
+    create group : groupadd "groupname"
+    add user to group : usermod a -G "groupname" "username"
+    check user in group :id "username"
+3. file and folder permission
+    
+    * show folder ownership: ls -la
+    * change ownership: chmod -Rf 777 (full permissions)
+    * changes user ownership of a file, directory: chown -Rf "username":"groupname" or :"groupname"

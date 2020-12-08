@@ -1,0 +1,8 @@
+* pwd : Get-Location
+* sudo  su - : supreme permission
+* sudo  su - : supreme permission
+* copy
+    examples 1: cp folder1/file.txt folder2 == cd folder1 => cp file.txt ../folder2
+    examples 2: cp -Rf folder1/* folder2
+*delete: rm file.txt or rm -Rf folder1
+* history | less

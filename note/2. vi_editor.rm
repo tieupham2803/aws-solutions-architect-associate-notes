@@ -1,0 +1,6 @@
+* create file or open file ; vi hello.txt
+* insert: type "i"
+* save: type esc ":w!" enter
+* quit: type esc ":q" enter
+* search: type  / + "search key" 
+* goto row: type  ":" + "row number" 

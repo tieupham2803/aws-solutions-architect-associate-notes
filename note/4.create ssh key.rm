@@ -1,0 +1,8 @@
+1 ssh-keygen -t rsa 
+2 cd /home/username/.ssh/rsa
+3 mv id_rsa.pub authorized_keys //change file name
+4. chmod 600 authorized_keys
+try login -
+
+note: make login by password
+    vi /etc/ssh/sshd_config => change "PermitEmptyPasswords" to "Yes"

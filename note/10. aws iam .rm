@@ -1,0 +1,12 @@
+1. create user 
+
+2. create group
+
+3. create roles
+    role: 
+4. create policies
+customize role
+5. create MFA
+2-Step Verification,
+
+access by aws cli  => aws configure => enter public access key

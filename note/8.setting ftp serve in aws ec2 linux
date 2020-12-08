@@ -1,0 +1,49 @@
+1. Cài FTP
+yum -y install vsftpd
+
+2. Thêm các dòng lệnh sau vào /etc/vsftpd/vsftpd.conf
+pam_service_name=vsftpd
+userlist_enable=YES
+tcp_wrappers=NO
+pasv_enable=YES
+pasv_address=[IP của máy chủ]
+pasv_min_port=60001
+pasv_max_port=60010
+force_dot_files=YES
+use_localtime=YES
+allow_writeable_chroot=YES
+listen=YES
+listen_ipv6=NO
+pasv_addr_resolve=NO
+
+3. Bỏ các comment sau trong /etc/vsftpd/vsftpd.conf
+Bỏ comment
+chroot_local_user=NO
+chroot_list_enable=YES
+chroot_list_file=/etc/vsftpd/chroot_list
+
+Thêm dòng
+user_config_dir=/etc/vsftpd/user_conf
+
+4. edit file sau và thêm vào user ftp-user
+vi /etc/vsftpd/chroot_list
+"username"
+
+5. Tạo thư mục 
+mkdir /etc/vsftpd/user_conf
+
+6.Tạo file /etc/vsftpd/user_conf/"username"
+vi /etc/vsftpd/user_conf/"username"
+local_root=/var/www/"username"
+
+7. Tạo user và set quyền cho user FTP
+Tạo user
+useradd "username"
+passwd "username"
+
+Set quyền "username" cho thư mục "username"
+chown "username" /var/www/"username"
+chmod 755 /var/www/"username"
+
+8. Mởi port 21, 60001-60010 trên Firewall
+9. Test kết nối

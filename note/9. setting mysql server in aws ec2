@@ -1,0 +1,71 @@
+1. Kiểm tra xem mariabdb có cài trên EC2/Linux hay không? nếu có thì remove mariadb đi
+yum list installed | grep mariadb
+
+2. Kiểm tra xem MySQL đã được cài đặt hay chưa
+yum list installed | grep mysql
+
+3. Thêm Repository mysql8.0 vào thư viện yum(trong Repository 8 này thì username gồm cả version 5.7)
+yum localinstall https://dev.mysql.com/get/mysql80-com ....
+
+4. Mình sẽ cài mysql 5.7 nên mình sẽ disable mysql 5.8 đi bằng lệnh
+yum-config-manager --disable mysql80-community
+
+5. Enable mysql 5.7 lên bằng lệnh
+yum-config-manager --enable mysql57-community
+
+6. Confirm thông tin version
+yum info mysql-community-server
+
+7. Cài đặt
+yum install mysql-community-server -y
+
+8. Kiểm tra version
+mysqld --version 
+
+9. Khởi động
+systemctl start mysqld.service
+
+10. Auto start-up
+systemctl enable mysqld.service
+
+11. Xem status trạng thái xem đã chạy hay chưa
+systemctl status mysqld.service
+
+12. Xem mật khẩu root mặc định
+cat /var/log/mysqld.log | grep password
+
+13. Thiết lập lần đầu cho MySQL
+mysql_secure_installation
+
+14. Xem charset hiện tại
+mysql -uroot -p
+show global variables like 'character%';
+
+15. Set default charset cho MySQL
+vi /etc/my.cnf
+{mysqld}
+character_set_server=utf8
+
+{client}
+default-character-set=utf8
+
+
+16. Tạo database
+create database database_name character set UTF8 collate utf8_bin;
+
+17. Tạo local user
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'Asdf123@!';
+
+ Gán quyền cho phép quản lý database database_name
+mysql} GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'localhost';
+
+18. Tạo remote user
+CREATE USER 'username'@'%' IDENTIFIED BY 'Asdf123@!';
+
+Gán quyền cho phép quản lý database database_name
+GRANT ALL PRIVILEGES ON database_name.* TO 'username'@'%';
+
+19. Mở firewall port 3306
+vào aws instances launch => modifyinbounds Securitygroups rule => add rule =>  MySQL/Aurora port 3306
+=> test connection port 3306: telnet awsdomain 3306
+kết nối thử

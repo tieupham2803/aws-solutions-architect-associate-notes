@@ -1,0 +1,23 @@
+if you already have a domain name 
+1. setting Dns => check dns  : nslookup "domain"
+2. setting Apache
+    yum install httpd -y
+    service httpd start
+check apache already : yum install telnet => telnet localhost 80
+3. Open firewall port 80
+    in aws dashboards: instances security groups => launch winzard => add rule with http port 80
+4. setting domain
+   
+NameVirtualHost *:80
+
+{VirtualHost *:80}
+    ServerAdmin info@coderhanoi.com
+    DocumentRoot /var/www/html/testdomain
+    ServerName testdomain.coderhanoi.com
+    {Directory "/var/www/html/testdomain"}      
+   Order deny,allow
+           Allow from all
+           AllowOverride All
+          Require all granted
+   {/Directory}
+{/VirtualHost}
